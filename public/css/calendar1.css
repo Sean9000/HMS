@@ -1,0 +1,19 @@
+  .fc-header-toolbar{
+    background-color: #898686;
+    height: 50px;
+  }
+
+  #calendar1 {
+    background-color: rgb(244, 255, 250);
+    width: 400px;
+    margin: 40px auto;
+    height:400px;
+  }
+  #calendar2 {
+    background-color: rgb(244, 255, 250);
+    width: 400px;
+    margin: 40px auto;
+    height:400px;
+  }
+ 
+  

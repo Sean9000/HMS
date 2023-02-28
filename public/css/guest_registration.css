@@ -1,0 +1,159 @@
+@import url(https://fonts.bunny.net/css?family=darker-grotesque);
+
+:root {
+    --line-border-color: #FFD56F;
+    --disabled-line-border: #d1d2d4;
+    --button-active-color: #830a48;
+    --text-color: #868991;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    max-width: 100vw;
+    position: relative;
+    width: 35rem;
+}
+
+.progress-container::before {
+    background-color: var(--disabled-line-border);
+    content: "";
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 58%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-border-color);
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 58%;
+    transform: translateY(-50%);
+    transition: 0.4s ease;
+    width: 0%;
+    z-index: -1;
+}
+
+.circle {
+    align-items: center;
+    background-color: #fff;
+    border: 3px solid var(--disabled-line-border);
+    border-radius: 50%;
+    color: var(--text-color);
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    transition: 0.4s ease;
+    width: 3rem;
+}
+
+.circle.active {
+    border-color: var(--line-border-color);
+}
+
+.btn:disabled {
+    background-color: var(--disabled-line-border);
+    border-radius: 0.5rem;
+    border: none;
+    color: var(--text-color);
+    cursor: not-allowed;
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+    padding: 1rem 2rem;
+}
+
+.btn {
+    background-color: #E0C822;
+    border-radius: 0.5rem;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 0.5rem;
+    padding: 1rem 2rem;
+    transition: background-color 0.5s, transform 0.5s;
+    width: 200px;
+    height: 40px;
+    position:relative;
+    top: 75px;
+    left: 50px;
+}
+
+.btn:active {
+    transform: scale(0.9);
+    background-color: var(--button-active-color);
+}
+.card1 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 110%;
+  height: 1100px;
+  background-color: white;
+  position: relative;
+  left: 10px;
+  top: -150px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.container1 {
+  padding: 2px 16px;
+}
+
+hr.new1 {
+  border-top: 1px solid gray;
+}
+hr.new2 {
+  border-top: 1px solid gray;
+  position: relative;
+  top: -1000px; 
+  left: 20px;
+}
+.button1 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: relative; 
+  top: -610px;
+  left: 900px;
+}
+.button1 {background-color: #686868;} 
+.button2 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: relative; 
+  top: -610px;
+  left: 900px;
+}
+.button2 {background-color: #E0C822
+    ;} 

@@ -1,0 +1,236 @@
+@import url(https://fonts.bunny.net/css?family=darker-grotesque);
+
+:root {
+    --line-border-color: #FFD56F;
+    --disabled-line-border: #d1d2d4;
+    --button-active-color: #830a48;
+    --text-color: #868991;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    max-width: 100vw;
+    position: relative;
+    width: 35rem;
+}
+
+.progress-container::before {
+    background-color: var(--disabled-line-border);
+    content: "";
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 58%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-border-color);
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 58%;
+    transform: translateY(-50%);
+    transition: 0.4s ease;
+    width: 0%;
+    z-index: -1;
+}
+
+.circle {
+    align-items: center;
+    background-color: #fff;
+    border: 3px solid var(--disabled-line-border);
+    border-radius: 50%;
+    color: var(--text-color);
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    transition: 0.4s ease;
+    width: 3rem;
+}
+
+.circle.active {
+    border-color: var(--line-border-color);
+}
+
+.btn:disabled {
+    background-color: var(--disabled-line-border);
+    border-radius: 0.5rem;
+    border: none;
+    color: var(--text-color);
+    cursor: not-allowed;
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+    padding: 1rem 2rem;
+}
+
+.btn {
+    background-color: #E0C822;
+    border-radius: 0.5rem;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 0 0.5rem;
+    transition: background-color 0.5s, transform 0.5s;
+    width: 200px;
+    height: 50px;
+    position:relative;
+    top: 50px;
+    left: 50px;
+}
+
+.btn:active {
+    transform: scale(0.9);
+    background-color: var(--button-active-color);
+}
+
+.btn:focus {
+    outline: none;
+}
+
+span {cursor:pointer; }
+		.number{
+			margin:100px;
+		}
+        /* -- quantity box -- */
+
+.quantity {
+  display: inline-block;
+ 
+ }
+
+.quantity .input-text.qty {
+ 
+ height: 41px;
+ padding: 0 5px;
+ text-align: center;
+ background-color: white;
+ border: 1px solid #efefef;
+ width: 200px;
+ position: relative;
+ top: 27px;
+ left: 30px;
+ border-style: solid;
+border-color: #7F8487;
+}
+
+.quantity.buttons_added {
+ text-align: left;
+ position: relative;
+ white-space: nowrap;
+ vertical-align: top; }
+
+.quantity.buttons_added input {
+ display: inline-block;
+ margin: 0;
+ vertical-align: top;
+ box-shadow: none;
+}
+
+.quantity.buttons_added .minus,
+.quantity.buttons_added .plus {
+ padding: 7px 10px 8px;
+ height: 41px;
+ background-color: #ffffff;
+ border: 1px solid #efefef;
+ cursor:pointer;}
+
+.quantity.buttons_added .minus {
+ border-right: 0;
+position: relative;
+left: 30px;
+top: 27px;
+border-style: 1px solid;
+border-color: #7F8487;
+}
+
+
+.quantity.buttons_added .plus {
+border-left: 0;
+position: relative;
+left: 30px;
+top: 27px; 
+border-style: solid;
+border-color: #7F8487;}
+
+.quantity.buttons_added .minus:hover,
+.quantity.buttons_added .plus:hover {
+ background: #eeeeee; }
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ margin: 0; }
+ 
+ .quantity.buttons_added .minus:focus,
+.quantity.buttons_added .plus:focus {
+ outline: none; }
+
+ .card1 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 82%;
+  height: 22%;
+  background-color: white;
+  position: relative;
+  left: 390px;
+  top: -93px;
+  border: 2px solid #E0C822;
+  border-radius: 5px;
+}
+
+.container1 {
+  padding: 2px 16px;
+}
+hr.new1 {
+  border-top: 1px solid #E0C822;
+}
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 50%;
+  height: 22%;
+  background-color: white;
+  position: relative;
+  left: -6px;
+  top: -70px;
+  border: 2px solid #E0C822;
+  border-radius: 5px;
+}
+
+.container2 {
+  padding: 2px 16px;
+}
+.card3 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 50%;
+  height: 22%;
+  background-color: white;
+  position: relative;
+  left: 180px;
+  top: -162px;
+  border: 2px solid #E0C822;
+  border-radius: 5px;
+}
+
+
+hr.new2 {
+  border-top: 1px solid #4C4C4C;
+  position: relative;
+  top: -140px;
+}
+
+
