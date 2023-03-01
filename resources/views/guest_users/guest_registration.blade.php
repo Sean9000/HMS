@@ -11,12 +11,13 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <title>Guest Information</title>
 
-        <link rel="stylesheet" href="{{ asset('css/guest_registration.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('css/guest_registration.css') }}"> --}}
     </head>
     <body class="bg-gray-100">
         <!-- Navbar -->
 
         <x-app-layout>
+
             <nav class="container bg-[#82e9e4] h-[50px] mx-auto rounded-b-md">
                 <!-- Flex container -->
                 <div class="flex items-center justify-between mx-[40px]">
@@ -38,7 +39,7 @@
             </nav>
 
             <!-- Icons -->
-            <div class="container">
+            {{-- <div class="container">
                 <div
                     class="progress-container"
                     style="position:relative; left: 400px; top: 30px;">
@@ -61,8 +62,8 @@
                         height="30"
                         width="25"/></div>
                 </div>
-
-            </section>
+            </div> --}}
+            {{-- </section> 
             <section class="room_details mx-[100px]">
                 <p style="position:relative; left: 290px;">Check-in &
                 </p>
@@ -75,143 +76,143 @@
                 <p style="position:relative; left: 790px; top: -150px;">Confirmation</p>
                 <div class="mb-10">
 
-                    <h2
-                        class="text-lg font-bold "
-                        style="position:relative; left: 8px; top: -120px; color:#4C4C4C; font-size: 20px;">Make a Reservation</h2>
-                    <p style="position: relative; top: -120px; left: 10px;">Please complete the form below</p>
-
-                    <div class="bg-gray w-full h-[1px]" style="position:relative;  top: -120px;"></div>
-
-                </div>
-                <div class="card1">
-
-                    <div class="container1">
-                        <br>
-                        <h4 style="font-size: 20px;">
-                            <b>Guest Information</b>
-                        </h4>
-                        <hr class="new1">
-
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div style="position: relative; left: 15px;">
-                            <p >Salutation:
-                                <span style="color:red">*</span></p>
-                            <select name="salutation" id="salutation" style="width: 190px">
-                                <option value="Ms">Ms.</option>
-                                <option value="Mr">Mr.</option>
-
-                            </select>
-
+                </section> --}}
+            <section>
+              
+                <div class="container mx-auto pt-10 px-4 sm:px-6 lg:px-8">
+                    <form method="POST" action="{{ route('store_guest_info') }}"> 
+                        @csrf
+                      <!-- Flex container -->
+                      <div class="justify-between mx-[50px]">
+                        <!-- Logo -->
+                        <div class="justify-center my-5">
+                          <h2 class="text-[18px] sm:text-2xl font-semibold">Make Reservation</h2>
+                          <p class="text-sm sm:text-base">Please complete the form below</p>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div style="position: relative; left: 250px; top: -64px; ">
-                            <p >Full name:
-                                <span style="color:red">*</span></p>
-                            <input
-                                class="form-control"
-                                type="text"
-                                name="fname"
-                                required="required"
-                                style="width: 380px; "
-                                placeholder="First name">
-
+                  
+                        <div class="bg-white rounded-lg border-2 shadow-md w-full pb-4">
+                          <div class="border-b-2 border-gray-300 px-4 py-3">
+                            <h3 class="text-lg sm:text-2xl font-semibold">Guest Information</h3>
+                          </div>
+                  
+                          <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
+                            <div class="flex flex-col lg:flex-row justify-center">
+                                <div class="mx-4 md:mx-6 py-3">
+                                  <label class="" for="salutation">Salutation:</label>
+                                  <select class="w-full md:w-[125px]" name="salutation" id="salutation">
+                                    <option value="Ms">Ms.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Mr">Mr.</option>
+                                  </select>   
+                                </div>
+                          
+                                <div class="px-4 md:px-6 py-3">
+                                  <label class="" for="fullname">First Name:</label>
+                                  <input type="text" class="w-full md:w-[400px]" name="first_name" id="full_name" placeholder="Full Name" required>  
+                                </div>
+                          
+                                <div class="px-4 md:px-6 py-3">
+                                  <label class="" for="lastname">Last Name:</label>
+                                  <input type="text" class="w-full md:w-[400px]" name="last_name" id="last_name" placeholder="Last Name" required>  
+                                </div>
+                          
+                            </div>
+                  
+                            <div class="mx-4 sm:mx-10">                                
+                              <label for="companyName">Company Name</label>
+                              <input type="text" name="company_name" id="company_name" class="w-full" placeholder="Company Name" >                             
+                            </div>
+                  
+                            <div class="mx-4 sm:mx-10">
+                              <label for="Address">Address</label>
+                              <input type="text" name="address" id="address" placeholder="Address" class="w-full" required>                              
+                            </div>
+                  
+                            <div class="mx-4 sm:mx-10">
+                              <label for="address">Phone Number</label><br>
+                              <input type="number"  name="phone_number" id="" class="w-full sm:w-[200px]" placeholder="+63" required>                              
+                            </div>
+                          </div>
                         </div>
+                  
+                        <div class="mx-auto mt-8">
+                          <div class="bg-white rounded-lg shadow-md border-2 w-full ">
+                            <div class="border-b-2 border-gray-300 px-4 py-3">
+                              <h3 class="text- sm:text-2xl font-semibold">Payment Method</h3>
+                            </div>
+                  
+                            <div class="mx-4 sm:mx-10 pt-5 pb-10">
+                              <div class="py-2">
+                                <input class="mr-2" type="radio" name="payment_method" id="cash" value="Cash" required>
+                                <label for="payment_method_cash">Cash</label>
+                              </div>
+                              <div class="py-2">
+                                <input class="mr-2" type="radio" name="payment_method" id="department_charge" value="Department Charge" required>
+                                <label for="payment_method_department_charge">Department Charge</label>
+                              </div>
+                              <div class=" mx-[100px] bg-slate-300 border-5 border-black  px-3 rounded-sm py-3" id="department_charge_options" style="display:none">
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_it" value="School of Information Technology">
+                                  <label for="department_it">School of Information Technology</label>
+                                </div>
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_edu" value="School of Education">
+                                  <label for="department_edu">School of Education</label>
+                                </div>
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_bhmt" value="School of Business and Hospitality and Tourism Management">
+                                  <label for="department_bhmt">School of Business and Hospitality and Tourism Management</label>
+                                </div>
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_acc" value="School of Accountancy">
+                                  <label for="department_acc">School of Accountancy</label>
+                                </div>
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_eng" value="School of Engineering and Architechture and Fine Arts">
+                                  <label for="department_eng">School of Engineering and Architechture and Fine Arts</label>
+                                </div>
+                                <div class="py-2">
+                                  <input class="mr-2" type="radio" name="department" id="department_lacj" value="School of Liberal Arts and Criminal Justice">
+                                  <label for="department_lacj">School of Liberal Arts and Criminal Justice</label>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <script>
+                            $(document).ready(function() {
+                              // Listen for changes in the payment method radio buttons
+                              $('input[name=payment_method]').change(function() {
+                                if ($(this).val() === 'Cash') {
+                                  // If cash is selected, unselect the department charge and hide its options
+                                  $('input[name=payment_method_dept]').prop('checked', false);
+                                  $('#department_charge_options').hide();
+                                } else if ($(this).val() === 'Department Charge') {
+                                  // If department charge is selected, unselect the cash and show its options
+                                  $('input[name=payment_method_cash]').prop('checked', false);
+                                  $('#department_charge_options').show();
+                                }
+                              });
+                            });
+                            </script>
+                            </div>
+                            <div class="flex justify-end mt-20">
+                                <button  class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button>
+                              </div> 
+                            </div>
+                        </div>  
                     </div>
-                    <div class="row">
-                        <div style="position: relative; left: 700px; top: -108px; ">
+                </form>
+            </div> 
+        </section>
 
-                            <input
-                                class="form-control"
-                                type="text"
-                                name="fname"
-                                required="required"
-                                style="width: 380px; "
-                                placeholder="Last name">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="position: relative; left: 25px; top: -1050px; ">
-                        <p >Company Name:
-                            <span ></span></p>
-                        <input
-                            class="form-control"
-                            type="text"
-                            name="fname"
-                            required="required"
-                            style="width: 1060px; ">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div style="position: relative; left: 25px; top: -1050px; ">
-                        <p >Address:
-                            <span style="color:red">*</span></p>
-
-                        <input
-                            class="form-control"
-                            type="text"
-                            name="fname"
-                            required="required"
-                            style="width: 1060px; ">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div style="position: relative; left: 25px; top: -1050px; ">
-                        <p >Phone Number:
-                            <span style="color:red">*</span></p>
-
-                        <input
-                            class="form-control"
-                            type="text"
-                            name="fname"
-                            required="required"
-                            style="width: 1060px; "
-                            placeholder="+639">
-
-                    </div>
-                </div>
-                <h4 style="font-size: 20px; position: relative; top: -1000px; left: 20px;">
-                    <b>Payment Method</b>
-                </h4>
-                <hr class="new2">
-
-                <input
-                    type="radio"
-                    id="cash"
-                    name="cash"
-                    value="HTML"
-                    style="position: relative; top: -970px; left: 25px;">
-                    <label for="html" style="position: relative; top: -970px; left: 25px;">Cash</label>
-                </input><br>
-
-                <input
-                    type="radio"
-                    id="dc"
-                    name="dc"
-                    value="HTML"
-                    style="position: relative; top: -960px; left: 25px;">
-                    <label for="html" style="position: relative; top: -960px; left: 25px;">Department Charge</label>
-                </input><br>
-
-                <a href="{{ url()->previous('') }}"  class="button1">Back</a>
-                <a href="#"class="button2">Continue</a>
-
-            </div>
+          
 
             <footer class="bg-[#a2eeea] mt-[150px]">
                 <div class="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-4 gap-8">
                     <!-- Logo -->
                     <div
                         class="flex flex-col items-center justify-between space-y-12
-            md:flex-col md:space-y-0 md:items-start">
+                            md:flex-col md:space-y-0 md:items-start">
                         <!-- Logo -->
                         <div>
                             <img src="{{ asset('./images/logom2.png')}}" class="h-[100px]" alt="">
