@@ -63,7 +63,7 @@
 
               <div class="grid grid-cols-1 mt-1">
                 <div class=" py-2 flex items-center">
-                  <label class="block text-gray-900 font-medium mr-4" for="number-of-nights">Number of Nights:</label>
+                  <label class="block text-gray-900 font-bold mr-4" for="number-of-nights">Number of Nights:</label>
                   <input type="" id="number_of_nights" name="number_of_nights"
                     class="bg-transparent pointer-events-none rounded py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:border-blue-500"
                     readonly>

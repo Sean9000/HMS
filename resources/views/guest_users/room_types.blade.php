@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-KlE5+5KpSJ5eI9XDDoHkw/KRjK8Z2QgZnC7V2fz51vhP7VvUz0Bd6pCZX6bPIW8Fv+6K0/SPfgiQc6/8V7jzGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @vite('resources/css/app.css')
+    <!-- Logo -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
     <title>Room Types</title>
 
     <style>

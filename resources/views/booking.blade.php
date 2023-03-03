@@ -5,7 +5,8 @@
     href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"/>
 
     <link href="/tail/tailwind.css" rel="stylesheet"/>
-
+<!-- Logo -->
+<link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
 <!-- page -->
 <main class="min-h-screen w-full bg-gray-100 text-gray-700" x-data="layout">
     <!-- header page -->
