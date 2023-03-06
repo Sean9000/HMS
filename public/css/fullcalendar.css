@@ -5,15 +5,7 @@
 
   #calendar1 {
     background-color: rgb(244, 255, 250);
-    width: 400px;
+    width: 500px;
     margin: 40px auto;
-    height:400px;
+    height:500px;
   }
-  #calendar2 {
-    background-color: rgb(244, 255, 250);
-    width: 400px;
-    margin: 40px auto;
-    height:400px;
-  }
- 
-  

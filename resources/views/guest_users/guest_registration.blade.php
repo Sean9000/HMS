@@ -99,38 +99,39 @@
                             <div class="flex flex-col lg:flex-row justify-center">
                                 <div class="mx-4 md:mx-6 py-3">
                                   <label class="" for="salutation">Salutation:</label>
-                                  <select class="w-full md:w-[125px]" name="salutation" id="salutation">
-                                    <option value="Ms">Ms.</option>
-                                    <option value="Mrs.">Mrs.</option>
-                                    <option value="Mr">Mr.</option>
+                                  <select class="w-full md:w-[125px]" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
+                                    <option value="Ms." {{ old('salutation') == 'Ms.' ? 'selected' : '' }}>Ms.</option>
+                                    <option value="Mrs." {{ old('salutation') == 'Mrs.' ? 'selected' : '' }}>Mrs.</option>
+                                    <option value="Mr." {{ old('salutation') == 'Mr.' ? 'selected' : '' }}>Mr.</option>
                                   </select>   
                                 </div>
                           
                                 <div class="px-4 md:px-6 py-3">
-                                  <label class="" for="fullname">First Name:</label>
-                                  <input type="text" class="w-full md:w-[400px]" name="first_name" id="full_name" placeholder="Full Name" required>  
+                                  <label class="" for="fullname">Full Name:&nbsp;<span class="text-red-700 font-bold">*</span></label>
+                                  <input type="text" class="w-full md:w-[400px]" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="Full Name" required>  
                                 </div>
                           
                                 <div class="px-4 md:px-6 py-3">
-                                  <label class="" for="lastname">Last Name:</label>
-                                  <input type="text" class="w-full md:w-[400px]" name="last_name" id="last_name" placeholder="Last Name" required>  
+                                  <label class="" for="lastname"></label>
+                                  <input type="text" class="w-full md:w-[400px]" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
                                 </div>
                           
                             </div>
                   
                             <div class="mx-4 sm:mx-10">                                
                               <label for="companyName">Company Name</label>
-                              <input type="text" name="company_name" id="company_name" class="w-full" placeholder="Company Name" >                             
+                              <input type="text" name="company_name" id="company_name" class="w-full" value="{{ old('company_name') }}" placeholder="Company Name" >                             
                             </div>
                   
                             <div class="mx-4 sm:mx-10">
-                              <label for="Address">Address</label>
-                              <input type="text" name="address" id="address" placeholder="Address" class="w-full" required>                              
+                              <label for="Address">Address&nbsp;<span class="text-red-700 font-bold">*</label>
+                              <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address" class="w-full" required>                              
                             </div>
                   
                             <div class="mx-4 sm:mx-10">
-                              <label for="address">Phone Number</label><br>
-                              <input type="number"  name="phone_number" id="" class="w-full sm:w-[200px]" placeholder="+63" required>                              
+                              <label for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
+                              <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px]" placeholder="+63" required>                              
+                              <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                             </div>
                           </div>
                         </div>
@@ -150,7 +151,7 @@
                                 <input class="mr-2" type="radio" name="payment_method" id="department_charge" value="Department Charge" required>
                                 <label for="payment_method_department_charge">Department Charge</label>
                               </div>
-                              <div class=" mx-[100px] bg-slate-300 border-5 border-black  px-3 rounded-sm py-3" id="department_charge_options" style="display:none">
+                              <div class=" mx-[100px] bg-slate-300 border-1 border-gray-400  px-3 rounded-sm py-3" id="department_charge_options" style="display:none">
                                 <div class="py-2">
                                   <input class="mr-2" type="radio" name="department" id="department_it" value="School of Information Technology">
                                   <label for="department_it">School of Information Technology</label>

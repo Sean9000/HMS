@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Carbon\Carbon;
 use App\Models\Rooms;
 use App\Models\Reservation;
@@ -13,118 +11,100 @@ class Guest_Controller extends Controller
 {
     public function passCheckInDate(Request $request)
     {
-        $request->validate([
-            'check_in_date' => 'required',
-            'check_out_date' => 'required',],
-            ['check-in-date.required' => 'The check-in date is required.',
-            'check-out-date.required' => 'The check-out date is required.',
-         ]);
+      
+        $validatedData = $request->validate([
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date|after:check_in_date',
+            // 'room_id' => 'required|exists:rooms,id',
+        ], [
+            'check_in_date.required' => 'The check-in date is required.',
+            'check_out_date.required' => 'The check-out date is required.',
+            'check_out_date.after' => 'The check-out date must be after the check-in date.',
+        ]);
+        $roomIds = Rooms::pluck('id');
+        $checkInDate = $request->input('check_in_date');
+        $checkOutDate = $request->input('check_out_date');    
+        $numberOfNights = $request->input('number_of_nights');
 
-        $request->session()->put('check_in_date', $request->input('check_in_date'));
-        $request->session()->put('check_out_date', $request->input('check_out_date'));
-        $request->session()->put('number_of_nights', $request->input('number_of_nights'));
+        $request->session()->put('check_in_date', $checkInDate);
+        $request->session()->put('check_out_date', $checkOutDate);
+        $request->session()->put('number_of_nights', $numberOfNights);
+
+        $roomIds = Rooms::pluck('id');
+        $reservedRoomIds = Reservation::where(function($query) use ($checkInDate, $checkOutDate) {
+            $query->whereBetween('checkin_date', [$checkInDate, $checkOutDate])
+                  ->orWhereBetween('checkout_date', [$checkInDate, $checkOutDate]);
+        })->pluck('room_id')->toArray();
+        
+        if (count(array_diff($roomIds->toArray(), $reservedRoomIds)) == 0) {
+            return back()->withErrors(['message' => 'No available room(s) from the selected dates due to its occupancy. You may try to select another date'])->withInput();
+        }
         
         return redirect()->route('room_types');
-
-        // return view('guest_users.room_types');
+    
+        // return redirect()->route('room_types');  
     }
-
+    
     public function viewRoomTypes() {
 
-    $room1 = Rooms::where('id', 1)->first();
-    $room2 = Rooms::where('id', 2)->first();
-    return view('guest_users.room_types',['room1'=>$room1, 'room2'=>$room2]);
+    
+        $room1 = Rooms::where('id', 1)->first();
+        $room2 = Rooms::where('id', 2)->first();
         
+        $checkInDate = session('check_in_date');
+        $checkOutDate = session('check_out_date');
+        
+        $isRoom1Reserved = $this->isRoomReserved($room1->id, $checkInDate, $checkOutDate);
+        $isRoom2Reserved = $this->isRoomReserved($room2->id, $checkInDate, $checkOutDate);
+    
+        return view('guest_users.room_types',[
+            'room1'=>$room1, 
+            'room2'=>$room2,
+            'isRoom1Reserved'=>$isRoom1Reserved,
+            'isRoom2Reserved'=>$isRoom2Reserved
+        ]);
     }
-
-    public function type_to_info(Request $request)
+    public function isRoomReserved($roomTypeId, $checkInDate, $checkOutDate)
     {
+        $reservations = Reservation::where('room_id', $roomTypeId)
+            ->where(function ($query) use ($checkInDate, $checkOutDate) {
+                $query->whereBetween('checkin_date', [$checkInDate, $checkOutDate])
+                    ->orWhereBetween('checkout_date', [$checkInDate, $checkOutDate])
+                    ->orWhere(function ($query) use ($checkInDate, $checkOutDate) {
+                        $query->where('checkin_date', '<=', $checkInDate)
+                            ->where('checkout_date', '>=', $checkOutDate);
+                    });
+            })->get();
+
+        return count($reservations) > 0;
+    }
     
 
-        //   'id'=>$rooms->id,
-        //   'capacity' => $rooms->capacity,
-        //   'roomType' => $rooms->room_type,
-        //   'rate' => $rooms->rate,
-        //   'amenites' => $rooms->amenites,
-        //   'description' => $rooms->description,
-
-        $request->session()->put('check_in_date', $request->input('check_in_date'));
-        $request->session()->put('check_out_date', $request->input('check_out_date'));
-        $request->session()->put('number_of_nights', $request->input('number_of_nights'));
-
-        return redirect()->route('guest_reg');
-        // return view('guest_users.room_info');
-
-    }
-    // public function viewRoomInfo() {
-
-    //     return view('guest_users.room_info');
-    // }
-
-    public function viewRoomInfo1(Request $request,)
+    public function type_to_info($room_id)
     {
-        $rooms = Rooms::select('rooms')
-        ->select('id','capacity', 'room_type', 'rate','amenites','description')
-        ->where('id', '=', 1)
-        ->first();
-
-        $checkin_date = $request->session()->get('check_in_date');
-        $checkout_date = $request->session()->get('check_out_date');
-        $number_of_nights = $request ->session()->get('number_of_nights');
+        $rooms = Rooms::where('id', $room_id)->first();
+        $checkin_date = session('check_in_date');
+        $checkout_date = session('check_out_date');
+        $number_of_nights = session('number_of_nights');
 
         return view('guest_users.room_info',
          ['check_in_date' => $checkin_date,
           'check_out_date' => $checkout_date,
           'number_of_nights' => $number_of_nights,
-          'id'=>$rooms->id,
-          'capacity' => $rooms->capacity,
-          'roomType' => $rooms->room_type,
-          'rate' => $rooms->rate,
-          'amenites' => $rooms->amenites,
-          'description' => $rooms->description,
+          'rooms'=>$rooms,
         ]);
-        
     }
-    public function viewRoomInfo2(Request $request,)
-    {
-        $rooms = Rooms::select('rooms')
-        ->select('id','capacity', 'room_type', 'rate','amenites','description')
-        ->where('id', '=', 2)
-        ->first();
-
-        $checkin_date = $request->session()->get('check_in_date');
-        $checkout_date = $request->session()->get('check_out_date');
-        $number_of_nights = $request ->session()->get('number_of_nights');
-
-        return view('guest_users.room_info',
-         ['check_in_date' => $checkin_date,
-          'check_out_date' => $checkout_date,
-          'number_of_nights' => $number_of_nights,
-          'id'=>$rooms->id,
-          'capacity' => $rooms->capacity,
-          'roomType' => $rooms->room_type,
-          'rate' => $rooms->rate,
-          'description' => $rooms->description,
-          'amenites' => $rooms->amenites,
-    
-        ]);
-        
-    }
-
 
     public function save_Registration(Request $request) {
-
         $guest_id  = auth()->user()->id;
-    
-        // $room_id = Input::get('room_id', 'default_value');
-        $roomPrice = 1300;
-        $add_extra_bed = 300;
+
         $numNights = $request->input('number_of_nights');
         $room_id = $request->input('room_id');
         $numGuests = $request->input('guest_num');
         $extraBed = $request->input('extra_bed');
         $booking_status = 'pending';
-
+        $roomPrice = Rooms::where('id', $room_id)->value('rate');
+        $add_extra_bed = 300;
         if ($numNights > 1) {
             $total_roomPrice = $roomPrice * $numNights;
         } else {
@@ -142,7 +122,7 @@ class Guest_Controller extends Controller
         $checkIn = $request->input('check_in_date');
         $checkOut = $request->input('check_out_date');
 
-         $checkin_date = date('Y-m-d', strtotime($checkIn));
+        $checkin_date = date('Y-m-d', strtotime($checkIn));
         $checkout_date = date('Y-m-d', strtotime($checkOut));
 
         $reservation = new Reservation();
@@ -157,37 +137,29 @@ class Guest_Controller extends Controller
         $reservation->num_guests = $numGuests;
         $reservation->extra_bed = $extraBed;
         $reservation->extra_bedFee = $extraBedFee;
-
-
         $reservation->save();
 
-        $request->session()->put('booking', [
+        if ($room_id == 1 || $room_id == 2) {
+            Rooms::where('id', $room_id)->update(['status_update' => 'Not Available']);
+        }
+
+        $request->session()->put('resevation', [
             'checkin_date' => $request->input('checkin_date'),
             'checkout_date' => $request->input('checkout_date'),
             'number_of_nights' => $request->input('number_of_nights')
         ]);
-        $request->session()->forget('booking');
-
+        $request->session()->forget('resevation');
 
         return redirect()->route('registration_form');
     } 
 
     public function view_guest_info(){
 
-
         return view('guest_users.guest_registration');
     }
 
-
-
-    public function viewLogin() {
+       public function viewLogin() {
 
         return view('auth.login');
     }
-
-    // public function backRoomTypes() {
-
-    //     return view('guest_users.room_types');
-    // }
- 
 }

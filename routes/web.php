@@ -55,29 +55,29 @@ Route::get('/redirects', [HomeController::class, 'index']);
 
     //----------------------------Guest Routes-----------------------------//
 
-    Route::post('/guest_users/room_types', [Guest_Controller::class, 'passCheckInDate'])->name('store_date');
+        
+Route::post('/guest_users/room_types', [Guest_Controller::class, 'passCheckInDate'])->name('store_date');
    
-    Route::get('/guest_users/room_types', [Guest_Controller::class, 'viewRoomTypes'])->name('room_types');
+Route::get('/guest_users/room_types', [Guest_Controller::class, 'viewRoomTypes'])->name('room_types');
+        
+Route::post('/guest_users/room_info1/{room_id}', [Guest_Controller::class, 'type_to_info'])->name('show_room_info1');
+Route::post('/guest_users/room_info2/{room_id}', [Guest_Controller::class, 'type_to_info'])->name('show_room_info2');
     
-    Route::post('/guest_users/room_info1', [Guest_Controller::class, 'type_to_info'])->name('show_room_info1');
-    Route::post('/guest_users/room_info2', [Guest_Controller::class, 'type_to_info'])->name('show_room_info2');
-
-    Route::get('/guest_users/room_info', [Guest_Controller::class, 'viewRoomInfo1'])->name('guest_reg');
-
-    Route::get('/guest_users/room_info', [Guest_Controller::class, 'viewRoomInfo2'])->name('guest_reg');
-
-    Route::post('/guest_users/guest_registration', [Guest_Controller::class, 'save_Registration'])->name('save_registration');
-
-    Route::get('/guest_users/guest_registration', [Guest_Controller::class, 'view_guest_info'])->name('registration_form');
-
-    Route::post('/guest_users/guest_information', [G_Info_Controller::class, 'save_G_Info'])->name('store_guest_info');
-
-    // Route::post('/guest_users/invoice', [Guest_Information_Controller::class, 'save_G_Info'])->name('store_guest_info');
-
-
-    Route::get('/guest_users/invoice', [Invoice_Controller::class, 'view_invoice'])->name('view_invoice');
+// Route::get('/guest_users/room_info', [Guest_Controller::class, 'viewRoomInfo1'])->name('guest_reg');
     
-    Route::get('/auth', [Guest_Controller::class, 'viewLogin'])->name('login_User');
+// Route::get('/guest_users/room_info', [Guest_Controller::class, 'viewRoomInfo2'])->name('guest_reg');
+    
+Route::post('/guest_users/guest_registration', [Guest_Controller::class, 'save_Registration'])->name('save_registration');
+    
+Route::get('/guest_users/guest_registration', [Guest_Controller::class, 'view_guest_info'])->name('registration_form');
+    
+Route::post('/guest_users/guest_information', [G_Info_Controller::class, 'save_G_Info'])->name('store_guest_info');
+    
+// Route::post('/guest_users/invoice', [Guest_Information_Controller::class, 'save_G_Info'])->name('store_guest_info');
+    
+Route::get('/guest_users/invoice', [Invoice_Controller::class, 'view_invoice'])->name('view_invoice');
+    
+ Route::get('/auth', [Guest_Controller::class, 'viewLogin'])->name('login_User');
 
      //----------------------------Invoice-----------------------------
 

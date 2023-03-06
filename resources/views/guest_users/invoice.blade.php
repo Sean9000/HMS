@@ -83,7 +83,6 @@
     <section>
 
       <div class="container mx-auto pt-10 px-4 sm:px-6 lg:px-8">
-
         <!-- Flex container -->
         <div class="justify-between mx-[50px]">
           <!-- Logo -->
@@ -108,19 +107,21 @@
             {{-- method="POST" --}}
              {{-- action="{{ route('') }}" --}}
              >
-
-        
             <div class="rounded-b-lg border-2 border-gray-700 shadow-md w-full pb-4">
-              <div class="space-y-4 font-regular text-base sm:text-lg pb-10">
+              <div class="space-y-4 font-regular text-base sm:text-lg pb-1">
                 <div class="px-5 pt-3 pb-3 text-left border-b-2 border-gray-400">
                   <h3 class="text-2xl font-semibold">Booking Summary</h3>
                 </div>
                 <div class="py-5">
                   <div class="w-full flex flex-col sm:flex-row justify-center">
-                    <div class="py-5 px-5 mb-5 sm:mb-0 w-full sm:w-1/2 sm:mx-10 sm:border-gray-400">
+                    <div class="py-2 px-5 mb-3 sm:mb-0 w-full sm:w-1/2 sm:mx-10 sm:border-gray-400">
                       <div class="flex justify-between">
-                        <label class="font-bold" for="room">Room No.: </label>
+                        <label class="font-bold" for="room">Room No: </label>
                         <div class="pl-10">{{ $reservation->room_id }}</div>
+                      </div>
+                      <div class="flex justify-between">
+                        <label class="font-bold" for="room">Room Type </label>
+                        <div class="pl-10">{{ $rooms->room_type }}</div>
                       </div>
                       <div class="flex justify-between">
                         <label class="font-bold" for="guests">Number of guests: </label>
@@ -132,7 +133,7 @@
                       </div>
                     </div>
 
-                    <div class="py-5 px-5 w-full sm:w-1/2 sm:mx-10">
+                    <div class="py-2 px-5 mb-3 sm:mb-0 w-full sm:w-1/2 sm:mx-10 sm:border-gray-400">
                       <div class="flex justify-between">
                         <label class="font-bold" for="check-in-date">Date Checked in: </label>
                         <div class="pl-10">{{ $reservation->checkin_date }}</div>
@@ -150,15 +151,15 @@
                 </div>
               </div>
 
-              <div class="bg-[#AFF4F1]">
-                <div class="max-w-7xl mx-auto sm:text-lg px-4 sm:px-6 lg:px-8">
+              <div class="bg-[#AFF4F1] ">
+                <div class="max-w-7xl mx-auto sm:text-lg px-4 sm:px-6 lg:px-8 py-3">
                   <div class="flex flex-wrap justify-evenly ">
-                    <div class="w-full md:w-1/2 py-5 px-5">
+                    <div class="w-full md:w-1/2 py-2 px-5">
                       <div class="justify-left">
                         <label class="font-bold" for="base-price">Base Price: </label>
                       </div>
                     </div>
-                    <div class="w-full md:w-1/2 py-5 px-5 ">
+                    <div class="w-full md:w-1/2 py-2 px-5 ">
                       <div class="justify-left">
                         <div class=""> {{ $reservation->base_price }}</div>
                       </div>
@@ -174,9 +175,9 @@
                       </div>
                     </div>
                   </div>
-                  <hr class="my-5 border-b-2 border-black">
+                  <hr class="border-b-2 border-black">
                   <div class="flex flex-wrap justify-between">
-                    <div class="w-full md:w-1/2 py-2 px-5">
+                    <div class="w-full md:w-1/2 py-2  px-5">
                       <div class="justify-between">
                         <label class="font-bold" for="base-price">Total Price:</label>
                       </div>
@@ -186,14 +187,14 @@
                         <div class=" font-bold"> {{ $reservation->total_price }}</div>
                       </div>
                     </div>
-                    <div class="w-full md:w-1/2 pb-10 px-5">
+                    <div class="w-full md:w-1/2 pb-10 py-2 px-5">
                       <div class="flex justify-between">
                         <label class="font-bold" for="base-price">Payment
-                          Method:&nbsp;{{ $guestRegistration->payment_method}}</label>
+                          Method:&nbsp;{{ $guestRegistration->payment_method }}</label>
                         <label class="font-bold" for="base-price"></label>
                       </div>
                     </div>
-                    <div class="w-full md:w-1/2 px-5">
+                    <div class="w-full md:w-1/2 py-2 px-5">
                       <div class="flex justify-between">
                         <div class=" font-bold">{{ $guestRegistration->department}}</div>
                       
@@ -221,9 +222,9 @@
                       <!--header-->
                       <div class="p-3">
                         <button
-                          class="p-1 ml-auto  border-1 text-black  float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
+                          class="p-1 ml-auto  text-black  float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
                           onclick="toggleModal('modal-id')">
-                          <h1 class="text-black">X</h1>
+                          <h1 class="text-black text-[30px]">x</h1>
                         </button>
                       </div>
                       <div class="relative items-start p-1  rounded-t">
@@ -264,7 +265,7 @@
                                 <p class="mr-4">Guest Name:</p>
                               </div>  
                               <div class="flex-shrink-0 text-left">
-                                <p>John Doe</p>
+                                <p>{{ $guestRegistration->first_name }} {{ $guestRegistration->last_name }}</p>
                               </div>
                               
                               </div>
@@ -272,12 +273,12 @@
                             <div class="flex justify-between items-center mb-4">
                               <p>Address:</p>
                               <div class="flex-shrink-0 text-left">
-                              <p>123 Main St, Calapan City, Oriental Mindoro</p>
+                              <p>{{ $guestRegistration->address }}</p>
                             </div>
                             </div>
                             <div class="flex justify-between mb-4">
                               <p>Phone Number:</p>
-                              <p>09123456789</p>
+                              <p>{{ $guestRegistration->phone_number }}</p>
                             </div>
                             <div class="flex justify-between mb-4">
                               <p>Room No.:</p>

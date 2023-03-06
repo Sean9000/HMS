@@ -61,13 +61,19 @@
     </div>
     {{-- {{ route('show_room_info') }} --}}
     <!-- Rooms -->
-    <div class="flex justify-around items-center mx-30 m-10">
-      <div>
-        <form method="POST" action="{{ route('show_room_info1') }}" class="flex justify-center items-center">
+   
+        <form method="POST" action="{{ route('show_room_info1', ['room_id' => 1]) }}" >
           @csrf
-          <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" />
-          <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" />
-          <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
+          <div class="flex justify-center">
+            <input type="text" name="check_in_date" value="{{ session('check_in_date') }}" 
+            class="w-[113px] text-center"/>
+            <input type="text" name="check_out_date" value="{{ session('check_out_date') }}" 
+            class="w-[113px] text-center"/>
+            <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
+          </div>
+        
+        <div class="flex justify-around items-center mx-30 m-10">
+          <div class="flex justify-center items-center">
           <div class="relative">
             <img src="{{ asset('./images/room1.jpg') }}" class="h-[350px] w-144 shadow-2xl" alt="">
             <div class="absolute bg-white h-[200px] w-80 top-60 left-[75px] border-2 border-yellow-500 rounded-md shadow-xl p-3 flex flex-col justify-between">
@@ -76,22 +82,24 @@
               <h2 class="text-yellow-500 font-bold text-lg">{{$room1->rate}}/ Night</h2>
               <p class="text-sm pb-2">This Queen Bed size room provides comfort for all guests of DWCC MicroHotel</p>
               <div class="flex justify-end">
-                <button type="submit" name="room1"
-                class="bg-yellow-500 text-black active:bg-yellow-800 font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150 cursor-pointer">
-                  <i class="fa-solid fa-circle-info">&nbsp;</i> Details
-                </button>
+                <button {{ $isRoom1Reserved ? 'disabled' : '' }} type="submit" name="room2"  value="2"
+                class="inline-flex items-center bg-yellow-500 text-black active:bg-yellow-800 font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>&nbsp; Details
+                </button>   
               </div>
             </div>
           </div>
         </form>
       </div>
      
-      <div class="">
-        <form method="POST" action="{{ route('show_room_info2')}}" class="flex justify-center items-center">
+      <div class="flex justify-center items-center">
+        <form method="POST" action="{{ route('show_room_info2', ['room_id' => 2]) }}" >
           @csrf
-          <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" />
-          <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" />
-          <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
+            <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" />
+            <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" />
+            <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
           <div class="relative">
             <img src="{{ asset('./images/room2.jpg') }}" class="h-[350px] w-144 shadow-xl" alt="">
             <div class="absolute bg-white h-[200px] w-80 top-60 left-[75px] border-2 border-yellow-500 rounded-md shadow-xl p-3 flex flex-col justify-between">
@@ -100,11 +108,13 @@
               <h2 class="text-yellow-500 font-bold text-lg">{{ $room2->rate }} / Night</h2>
               <p class="text-sm pb-2">This room can easily accommodate 1-3 people in comfort</p>
               <div class="flex justify-end">
-                <button type="submit" name="room2"  
-                class="bg-yellow-500 text-black active:bg-yellow-800 font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150 cursor-pointer">
-                  <i class="fa-solid fa-circle-info">&nbsp;</i> Details
-                </button>
-              </div>
+                <button type="submit" name="room2"  value="2" {{ $isRoom2Reserved ? 'disabled' : '' }}  class="inline-flex items-center bg-yellow-500 text-black active:bg-yellow-800 {{ $isRoom2Reserved ? 'bg-gray-400' : '' }} 
+                font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>&nbsp; Details
+                </button>   
+             </div>
             </div>
           </div>
         </form>
@@ -117,7 +127,6 @@
            </a>
     </div>
 </div>
-    
     <!-- Footer -->
     <footer class="bg-[#a2eeea] mt-[150px]">
         <div class="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-4 gap-8">
@@ -129,19 +138,16 @@
                     <img src="{{ asset('./images/logom2.png') }}" class="h-[100px]" alt="">
                 </div>
             </div>
-
             <div class="">
                 <h1 class="font-bold text-lg w-full">MICROHOTEL</h1>
                 <p class="text-sm text-gray-900">The DWCC Microhotel is a school-run hotel located inside the Divine Word College of Calapan.</p>
             </div>
-
             <div class="">
                 <h1 class="font-bold text-lg">Contact Us</h1>
                     <p class="text-sm text-gray-900">Gov Infantado St, Calapan City, Oriental Mindoro</p>
                     <p class="text-sm text-gray-900">microhotel@dwcc.edu.ph</p>
                     <p class="text-sm text-gray-900">09123456789</p>
             </div>
-
             <div class="flex flex-col items-center justify-between space-y-12
             md:flex-col md:space-y-0 md:items-start">
                 <!-- Logo -->
@@ -150,7 +156,6 @@
                 </div>
             </div>
         </div>
-
         <div class="bg-[#55AFAB] flex justify-center">
             <p class="text-sm">Copyright &copy; 2023 DWCC MicroHotel</p>
         </div>

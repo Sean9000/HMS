@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+         <link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -18,7 +21,6 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
           
-
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
